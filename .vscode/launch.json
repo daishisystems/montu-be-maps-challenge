@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch API Server",
+        "type": "node",
+        "request": "launch",
+        "runtimeArgs": ["-r", "ts-node/register"],
+        "args": ["${workspaceFolder}/src/interfaceAdapters/expressApi.ts"],
+        "cwd": "${workspaceFolder}",
+        "envFile": "${workspaceFolder}/.env",
+        "outputCapture": "std",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Attach to Running Process",
+        "type": "node",
+        "request": "attach",
+        "processId": "${command:PickProcess}"
+      }
+    ]
+  }
+  
