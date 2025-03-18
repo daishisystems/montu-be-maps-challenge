@@ -1,11 +1,8 @@
-// AddressValidator.test.ts
 import { AddressValidator } from "../src/application/AddressValidator";
 import { Address } from "../src/core/models/Address";
 
-console.log("Running AddressValidator Tests...");
-
-(() => {
-    try {
+describe("AddressValidator", () => {
+    test("validates Australian address", () => {
         const validAddress: Address = {
             fullAddress: "456 Queen St, Brisbane, QLD, Australia",
             country: "Australia",
@@ -18,16 +15,10 @@ console.log("Running AddressValidator Tests...");
             state: "Queensland",
             postalCode: "4000"
         };
-        if (AddressValidator.isValidAustralianAddress(validAddress)) {
-            console.log("✔ Test Passed: validates Australian address");
-        } else {
-            console.error("✘ Test Failed: validates Australian address");
-        }
-    } catch (error) {
-        console.error("✘ Test Failed: validates Australian address", error);
-    }
+        expect(AddressValidator.isValidAustralianAddress(validAddress)).toBe(true);
+    });
 
-    try {
+    test("invalidates non-Australian address", () => {
         const invalidAddress: Address = {
             fullAddress: "789 Broadway, New York, USA",
             country: "USA",
@@ -40,12 +31,6 @@ console.log("Running AddressValidator Tests...");
             state: "New York",
             postalCode: "10001"
         };
-        if (!AddressValidator.isValidAustralianAddress(invalidAddress)) {
-            console.log("✔ Test Passed: invalidates non-Australian address");
-        } else {
-            console.error("✘ Test Failed: invalidates non-Australian address");
-        }
-    } catch (error) {
-        console.error("✘ Test Failed: invalidates non-Australian address", error);
-    }
-})();
+        expect(AddressValidator.isValidAustralianAddress(invalidAddress)).toBe(false);
+    });
+});
